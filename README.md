@@ -46,4 +46,4 @@ The output is saved in several files stored in the ./results folder:
 * Transmission of aperiodic traffic using Dynamic Grant with HARQ: lanzar_RANlatency_highway_aperiodic_HARQ.m 
 
 # Licence 
-This code is licenced under the GNU GPLv2 license.
+This code is licenced under the GNU GPLv2 license
