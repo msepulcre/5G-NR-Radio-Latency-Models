@@ -40,14 +40,20 @@ function RadioLatencyAnalysis(YToPrint,XToPrint,output)
 % output='text';
 % output='figure';
 
+disp('Please, set the values for the different variables you want to consider to perform the analysis of the results.');
+disp('Set the values for BW, SCS, link_direction, MCS_table, n_rep, v, N_MC, density, traffic, Tp, data escenario, maxN_retx, PDCCH_config, PUCCH_config, flag_control, minislot_config')
+disp('Also, follow the steps indicated in analysis.m.')
+
 BW=[20]; %10 20 30 40 50];
-SCS=30;
+% SCS=30;
+SCS=[15 30 59];
 link_direction=1;
 MCS_table=[2 3];
 n_rep=1;
 v=2; 
 N_MC=1;
 density=[10 20 40 60 80];
+
 
 % traffic=1 --> periodic
 traffic=1;  
@@ -74,11 +80,11 @@ end
 minislot_config=0;
 
 
-hf=figure;
+% hf=figure;
 dir_actual=cd();
 
 for i_MCStable=1:length(MCS_table)
-    analysis(YToPrint,XToPrint,link_direction,BW,nRBperUE,data,v,Nmin,Nmax,SCS,escenario,density,MCS_table(i_MCStable),traffic,Tp,N_MC,n_rep,maxN_retx,output,PDCCH_config,PUCCH_config,flag_control,minislot_config,hf);
+    analysis(YToPrint,XToPrint,link_direction,BW,nRBperUE,data,v,Nmin,Nmax,SCS,escenario,density,MCS_table(i_MCStable),traffic,Tp,N_MC,n_rep,maxN_retx,output,PDCCH_config,PUCCH_config,flag_control,minislot_config);
     cd(dir_actual);
     close all;
 end

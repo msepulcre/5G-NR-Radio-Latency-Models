@@ -1,4 +1,7 @@
-function analysis(YToPrint,XToPrint,link_direction,BW,nRBperUE,data,MIMOlayers,Nmin,Nmax,SCS,escenario,density,MCS_table,traffic,Tp,N_MC,n_rep,maxN_retx,output,PDCCH_config,PUCCH_config,flag_control,minislot_config,hf)
+function analysis(YToPrint,XToPrint,link_direction,BW,nRBperUE,data,MIMOlayers,Nmin,Nmax,SCS,escenario,density,MCS_table,traffic,Tp,N_MC,n_rep,maxN_retx,output,PDCCH_config,PUCCH_config,flag_control,minislot_config)
+
+disp('Please, be sure that you have configured the variables auxNewValueForAnalysis and auxNewPlot.');
+disp('Search for PLEASE CONFIGURE and follow the instructions.');
 
 if ~exist('results','dir')
     mkdir('results')
@@ -11,31 +14,42 @@ switch output
     case 'text'
         flag_fich=1;
         flag_fig=0;
-    case 'figur'
+    case 'figure'
         flag_fich=0;
         flag_fig=1;
 end
 
 
 if flag_fig==1
-    aux=MCS_table;  %A new figure is created for each value of aux
-                    %aux can take the value of different variables (SCS,
-                    %n_rep...)
-%     aux=SCS;
+% PLEASE CONFIGURE
+% A new figure is created for each value of auxNewValueForAnalysis
+% You should copy in auxNewValueForAnalysis the values of the variable you are interested in 
+% For example, if auxNewValueForAnalysis=MCS_table, a new figure will be created for each value of the MCS_table variable
+%              if auxNewValueForAnalysis=Tp, a new figure will be created for each value of the Tp variable 
+%              if auxNewValueForAnalysis=SCS, a new figure will be created for each value of the SCS variable 
+% You can assign the value of other variables (density, n_rep, etc.)
+    auxNewValueForAnalysis = Tp;
+    % auxNewValueForAnalysis=MCS_table;  
+    % auxNewValueForAnalysis=SCS;
 else
-    aux=SCS;
+    auxNewValueForAnalysis=SCS;
 end
 
-for ifig=1:length(aux)
+for ifig=1:length(auxNewValueForAnalysis)
 	if flag_fig==1
-        % this must be adapted according to the variable assigned to aux in
-        % line 17
-		MCS_table=aux(ifig);
-		varcol1='MCS table';
-% 		SCS=aux(ifig);
-% 		varcol1='SCS';
+        % PLEASE CONFIGURE
+        % you must assign here the current value to the variable used in auxNewValueForAnalysis
+        % If auxNewValueForAnalysis = Tp, please, include the following code
+        Tp=auxNewValueForAnalysis(ifig);
+        varcol1='Tp';
+        % If auxNewValueForAnalysis = MCS_table, please, include the following code
+		% MCS_table=auxNewValueForAnalysis(ifig);
+		% varcol1='MCS table';
+        % If auxNewValueForAnalysis = SCS, please, include the following code
+        % SCS=auxNewValueForAnalysis(ifig);
+        % varcol1='SCS';
 	else
-		SCS=aux(ifig);
+		SCS=auxNewValueForAnalysis(ifig);
 		varcol1='SCS';
 	end
     
@@ -165,31 +179,37 @@ for ifig=1:length(aux)
     
     if ifig==1
         if flag_fig==1
-            % a new plot is included in the figure for each value of aux2
-           aux2=SCS;			
+           % PLEASE CONFIGURE
+           % Several plots can be included in the same figure.
+           % Please, assign to auxNewPlot the value of the variable you are interested in
+           % If auxNewPlot=SCS and SCS = [15 30], the same figure will include the results for both values of SCS
+           auxNewPlot=SCS;			
            varcol2='SCS';
-%            aux2=N_MC;
-%            varcol2='N_MC';
-%             aux2=n_rep;
-%             varcol2='n_rep';
-%             aux2=maxN_retx;
-%             varcol2='maxN_retx';
+            % auxNewPlot=N_MC;
+            % varcol2='N_MC';
+            % auxNewPlot=n_rep;
+            % varcol2='n_rep';
+            % auxNewPlot=maxN_retx;
+            % varcol2='maxN_retx';
         else
-            aux2=Tp;
+            auxNewPlot=Tp;
             varcol2='Tp';	
         end
     end
-    for iter=1:length(aux2)
-	if flag_fig==1
-        % adapt this instruction according to the assignment to aux2 in
-        % line 164
-		SCS=aux2(iter);     
-% 		N_MC=aux2(iter);
-% 		n_rep=aux2(iter);
-%		maxN_retx=aux2(iter);
-	else
-		Tp=aux2(iter);
-	end
+    for iter=1:length(auxNewPlot)
+	    if flag_fig==1
+            % PLEASE CONFIGURE
+            % you must assign here the current value to the variable used in auxNewPlot
+            % If auxNewPlot = SCS, please, include the following code
+		    SCS = auxNewPlot(iter);     
+            % If auxNewPlot = N_MC, please, include the following code
+            % N_MC=auxNewPlot(iter);
+
+		    % n_rep=auxNewPlot(iter);
+            % maxN_retx=auxNewPlot(iter);
+	    else
+		    Tp=auxNewPlot(iter);
+	    end
 
         xvalue=[];
         yvalue=[];
@@ -362,11 +382,11 @@ for ifig=1:length(aux)
                                                             irow=0:4:msize-1;
                                                             sPacket=sPacket(irow+3,:);
                                                             [msize,nsize]=size(sPacket);
-                                                            aux=[];
+                                                            aux3=[];
                                                             for ii=1:msize
-                                                                aux=[aux;sPacket(ii,:);sPacket(ii,:);sPacket(ii,:);sPacket(ii,:)];
+                                                                aux3=[aux3;sPacket(ii,:);sPacket(ii,:);sPacket(ii,:);sPacket(ii,:)];
                                                             end
-                                                            sPacket=aux;
+                                                            sPacket=aux3;
                                                             [msize,nsize]=size(sPacket);
                                                             sPacket=reshape(sPacket,1,msize*nsize);
                                                         end
@@ -603,7 +623,7 @@ for ifig=1:length(aux)
                                 miboxplot2(yvalue(:,indx),xvalue(indx)-0.2+(iter-1)*0.2,0.15);
                             end
                     else
-                        fp=plot(xvalue,yvalue,'DisplayName',sprintf('%s=%d',varcol2,aux2(iter)));
+                        fp=plot(xvalue,yvalue,'DisplayName',sprintf('%s=%d',varcol2,auxNewPlot(iter)));
                         set(fp,'LineStyle',line);
                         set(fp,'Color',color);
                         set(fp,'Marker',marker);
@@ -615,7 +635,7 @@ for ifig=1:length(aux)
                     fprintf(fid,'\n\t\t%s\t',xname);
                     fprintf(fid,'%s\n',print_column);
                 end
-                fprintf(fid,'\t\t%.4f\t',aux2(iter));
+                fprintf(fid,'\t\t%.4f\t',auxNewPlot(iter));
                 for i=1:length(yvalue)
                     fprintf(fid,'%.4f\t',yvalue(i));
                 end
