@@ -35,15 +35,15 @@ The RadioToE2Emodel function is called at the end of the RadioLatency.m script. 
 
 > The code is available at https://github.com/msepulcre/5G-E2E-V2N2V-Latency-Models
  
-You can also use the RadioLatencyAnalysis.m function to analyze the latency results achieved with the 5G NR radio latency model.
+You can also use the RadioLatencyAnalysis.m function to analyze the latency results achieved with the 5G NR radio latency model. The output is saved in several files stored in the ./results folder.
  
 If you want to run the same configurations than the ones in the paper, you could simply run the scripts:
 
-The output is saved in several files stored in the ./results folder:
-
 * Transmission of periodic traffic using semi-static scheduling (SPS in DL and Configured Grant in UL) with k-repetitions: lanzar_RANlatency_highway_periodic_repetitions.m.
 * Transmission of periodic traffic using semi-static scheduling (SPS in DL and Configured Grant in UL) with HARQ: lanzar_RANlatency_highway_periodic_HARQ.m 
-* Transmission of aperiodic traffic using Dynamic Grant with HARQ: lanzar_RANlatency_highway_aperiodic_HARQ.m 
+* Transmission of aperiodic traffic using Dynamic Grant with HARQ: lanzar_RANlatency_highway_aperiodic_HARQ.m
+
+
 
 # Licence 
 This code is licenced under the GNU GPLv2 license
